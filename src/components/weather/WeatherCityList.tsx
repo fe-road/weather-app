@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import WeatherCityItem from './WeatherCityItem';
-import SearchAddCity from './SearchAddCity';
+import SearchAddCity from '../form/SearchAddCity';
 
-import { City } from '../models/City';
+import { City } from '../../models/City';
 
 const MAX_ITEMS = 5;
 const CITY_LIST_STORAGE_KEY = 'cityList';

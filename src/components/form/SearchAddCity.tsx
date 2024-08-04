@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { City } from '../models/City';
+import { CityModel } from '../../models/City';
 
 interface Props {
     disabled: boolean;
-    addCity: (city: City) => void;
+    addCity: (city: CityModel) => void;
 }
 
 const SearchAddCity = ({ disabled, addCity }: Props) => {

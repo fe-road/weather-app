@@ -1,4 +1,4 @@
-import WeatherCityList from './components/WeatherCityList';
+import WeatherCityList from './components/weather/WeatherCityList';
 
 const App = () => {
   return (
