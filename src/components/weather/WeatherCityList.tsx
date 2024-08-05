@@ -2,19 +2,19 @@ import { useState } from 'react';
 import WeatherCityItem from './WeatherCityItem';
 import SearchAddCity from '../form/SearchAddCity';
 
-import { City } from '../../models/City';
+import { CityModel } from '../../models/City';
+import { fetchCityList, saveCityList } from '../../services/storageService';
 
 const MAX_ITEMS = 5;
-const CITY_LIST_STORAGE_KEY = 'cityList';
 
 const WeatherCityList = () => {
-    const [list, setList] = useState<Array<City>>(JSON.parse(localStorage.getItem(CITY_LIST_STORAGE_KEY) ?? '[]') as Array<City>);
+    const [list, setList] = useState<Array<CityModel>>(fetchCityList());
 
-    const addCity = (city: City): void => {
+    const addCity = (city: CityModel): void => {
         if (list.length < MAX_ITEMS) {
             setList((currentValue) => {
                 const newItems = [...currentValue, city];
-                localStorage.setItem(CITY_LIST_STORAGE_KEY, JSON.stringify(newItems));
+                saveCityList(newItems);
                 return newItems;
             });
         }
@@ -24,14 +24,14 @@ const WeatherCityList = () => {
         if (index >= 0 && index < list.length) {
             setList((currentValue) => {
                 const newItems = currentValue.filter((item, i) => index !== i);
-                localStorage.setItem(CITY_LIST_STORAGE_KEY, JSON.stringify(newItems));
+                saveCityList(newItems);
                 return newItems;
             });
         }
     };
 
     return (
-        <section className='flex flex-col gap-y-1 mt-2'>
+        <section className='flex flex-col gap-y-4 mt-2 text-gray-800'>
             <SearchAddCity
                 disabled={list.length === MAX_ITEMS}
                 addCity={addCity}

@@ -13,7 +13,7 @@ const WeatherCityItem = ({ item, remove }: Props) => {
     const futureForecast = generateFutureForecast();
 
     return (
-        <article className='relative flex flex-col border-2 rounded-md px-4 py-2 bg-white'>
+        <article className='relative flex flex-col drop-shadow-md rounded-md px-4 py-2 bg-white'>
             <p className='text-lg'>{item.name}</p>
 
             <button

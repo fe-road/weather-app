@@ -21,7 +21,7 @@ const SearchAddCity = ({ disabled, addCity }: Props) => {
                 type='text'
                 value={search}
                 placeholder='Enter your city...'
-                className='w-full border bg-slate-50 px-2'
+                className='w-full border drop-shadow-sm rounded-md bg-slate-50 px-2'
                 onChange={(e) => setSearch(e.target.value)}
             />
             <button
