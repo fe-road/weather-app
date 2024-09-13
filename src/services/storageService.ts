@@ -1,4 +1,4 @@
-import { CityModel } from '../models/City';
+import { CityModel } from '../models/Location';
 
 const CITY_LIST_STORAGE_KEY = 'cityList';
 

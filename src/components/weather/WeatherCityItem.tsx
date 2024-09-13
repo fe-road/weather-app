@@ -1,7 +1,9 @@
-import { CityModel } from '../../models/City';
-import { generateDetailedForecast, generateFutureForecast } from '../../services/mockService';
+import { useEffect, useState } from 'react';
+import { CityModel } from '../../models/Location';
+import { getForecastByLocation } from '../../services/apiService';
 import DetailedForecast from '../forecast/DetailedForecast';
 import FutureForecast from '../forecast/FutureForecast';
+import { LocationWeatherForecastModel } from '../../models/Weather';
 
 interface Props {
     item: CityModel;
@@ -9,9 +11,16 @@ interface Props {
 }
 
 const WeatherCityItem = ({ item, remove }: Props) => {
-    const todaysForecast = generateDetailedForecast();
-    const futureForecast = generateFutureForecast();
+    const [weatherForecast, setWeatherForecast] = useState<LocationWeatherForecastModel>();
 
+    useEffect(() => {
+        const getLocationForecast = async () => {
+            setWeatherForecast(await getForecastByLocation(item.name));
+        }
+
+        getLocationForecast();
+    }, [item]);
+    
     return (
         <article className='relative flex flex-col drop-shadow-md rounded-md px-4 py-2 bg-white'>
             <p className='text-lg'>{item.name}</p>
@@ -23,9 +32,9 @@ const WeatherCityItem = ({ item, remove }: Props) => {
                 <span className='drop-shadow-sm fa-solid fa-trash' />
             </button>
 
-            <DetailedForecast forecast={todaysForecast} />
+            {weatherForecast && <DetailedForecast forecast={weatherForecast} />}
             <div className='h-0.5 bg-slate-200 my-3' />
-            <FutureForecast forecastList={futureForecast} />
+            {weatherForecast && <FutureForecast forecastList={weatherForecast} />}
         </article>
     );
 };

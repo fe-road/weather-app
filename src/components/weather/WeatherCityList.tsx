@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import WeatherCityItem from './WeatherCityItem';
 import SearchAddCity from '../form/SearchAddCity';
 
-import { CityModel } from '../../models/City';
+import { CityModel } from '../../models/Location';
 import { MAX_ITEMS } from '../../constants/weather-constants';
 import { fetchCityList, saveCityList } from '../../services/storageService';
 
@@ -23,7 +23,7 @@ const WeatherCityList = () => {
 
     useEffect(() => {
         saveCityList(list);
-    }, [list])
+    }, [list]);
 
     return (
         <section className='flex flex-col gap-y-4 mt-2 text-gray-800'>

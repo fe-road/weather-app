@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CityModel } from '../../models/City';
+import { CityModel } from '../../models/Location';
 
 interface Props {
     disabled: boolean;
