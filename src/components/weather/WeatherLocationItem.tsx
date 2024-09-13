@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
-import { CityModel } from '../../models/Location';
-import { getForecastByLocation } from '../../services/apiService';
-import DetailedForecast from '../forecast/DetailedForecast';
-import FutureForecast from '../forecast/FutureForecast';
+
+import { LocationModel } from '../../models/Location';
 import { LocationWeatherForecastModel } from '../../models/Weather';
+import { getForecastByLocation } from '../../services/apiService';
+
+import CurrentWeather from './CurrentWeather';
+import WeatherForecast from './WeatherForecast';
 
 interface Props {
-    item: CityModel;
+    item: LocationModel;
     remove: () => void;
 }
 
-const WeatherCityItem = ({ item, remove }: Props) => {
+const WeatherLocationItem = ({ item, remove }: Props) => {
     const [weatherForecast, setWeatherForecast] = useState<LocationWeatherForecastModel>();
 
     useEffect(() => {
@@ -32,11 +34,11 @@ const WeatherCityItem = ({ item, remove }: Props) => {
                 <span className='drop-shadow-sm fa-solid fa-trash' />
             </button>
 
-            {weatherForecast && <DetailedForecast forecast={weatherForecast} />}
+            {weatherForecast?.current && <CurrentWeather weather={weatherForecast.current} />}
             <div className='h-0.5 bg-slate-200 my-3' />
-            {weatherForecast && <FutureForecast forecastList={weatherForecast} />}
+            {weatherForecast?.forecast?.forecastday && <WeatherForecast forecastList={weatherForecast.forecast.forecastday} />}
         </article>
     );
 };
 
-export default WeatherCityItem;
+export default WeatherLocationItem;

@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-import { CityModel } from '../../models/Location';
+import { LocationModel } from '../../models/Location';
 
 interface Props {
     disabled: boolean;
-    addCity: (city: CityModel) => void;
+    addLocation: (location: LocationModel) => void;
 }
 
-const SearchAddCity = ({ disabled, addCity }: Props) => {
+const SearchAddLocation = ({ disabled, addLocation }: Props) => {
     const [search, setSearch] = useState('');
 
     const add = (): void => {
-        addCity({ name: search });
+        addLocation({ name: search });
         setSearch('');
     };
 
@@ -20,7 +20,7 @@ const SearchAddCity = ({ disabled, addCity }: Props) => {
             <input
                 type='text'
                 value={search}
-                placeholder='Enter your city...'
+                placeholder='Enter your location...'
                 className='w-full border drop-shadow-sm rounded-md bg-slate-50 px-2'
                 onChange={(e) => setSearch(e.target.value)}
             />
@@ -30,10 +30,10 @@ const SearchAddCity = ({ disabled, addCity }: Props) => {
                 onClick={add}
             >
                 <span className='mr-1 fa-solid fa-plus' />
-                Add City
+                Add Location
             </button>
         </div>
     );
 };
 
-export default SearchAddCity;
+export default SearchAddLocation;
